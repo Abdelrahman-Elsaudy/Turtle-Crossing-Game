@@ -1,4 +1,4 @@
-# Use "w" to move the turtle up, and "s" to move the turtle down.
+# Use "Up and "Down" to move the turtle down.
 
 from turtle import Screen
 from timmy import Timmy
@@ -11,32 +11,32 @@ screen.setup(600, 600)
 screen.tracer(0)
 screen.listen()
 
-current_level = Statements()
-game_over = Statements()
+statement = Statements()
 timmy = Timmy()
 cars = Cars()
 
 game_on = True
 coeff = 0
 speed = 0.2
+
+screen.onkeypress(timmy.moving_up, "Up")
+screen.onkeypress(timmy.moving_down, "Down")
+
 while game_on:
     screen.update()
     time.sleep(speed)
-    current_level.levels()
-    screen.onkeypress(timmy.moving_up, "w")
-    screen.onkeypress(timmy.moving_down, "s")
+    statement.current_level()
     cars.motion()
-    if coeff % 4 == 0:       # This coefficient is used to control the amount of cars.
+    if coeff % 4 == 0:       # This coefficient is used to control the cars traffic density.
         cars.creation()
     for car in cars.cars_list:
         if car.distance(timmy) < 20:
-            game_over.end()
+            statement.game_over()
             game_on = False
     if timmy.ycor() >= 280:
-        current_level.score += 1
+        statement.score += 1
         timmy.goto(0, -280)
         speed *= 0.5
-
     coeff += 1
 
 screen.exitonclick()
