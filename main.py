@@ -1,4 +1,4 @@
-# Use "Up and "Down" to move the turtle down.
+# Use "Up" and "Down" to move the turtle down.
 
 from turtle import Screen
 from timmy import Timmy
@@ -33,10 +33,13 @@ while game_on:
         if car.distance(timmy) < 20:
             statement.game_over()
             game_on = False
+
+    # When the turtle crosses the road, and we move to the next level.
     if timmy.ycor() >= 280:
         statement.score += 1
         timmy.goto(0, -280)
         speed *= 0.5
+
     coeff += 1
 
 screen.exitonclick()
